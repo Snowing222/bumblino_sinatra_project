@@ -1,0 +1,5 @@
+class PlaydateController < ApplicationController
+  
+  
+end
+  
