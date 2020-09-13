@@ -1,0 +1,27 @@
+<h1>Edit The Playdate!</h1>
+
+  <form method='post' action='/playdates/<%=@playdate.id%>'>
+  <input type='hidden' id='hidden' name='_method' value='patch'>
+  <p><label for='title'>Title</label>
+  <input type='text' id='title' name='title' value='<%=@playdate.title%>' /></p>
+  <p><label for='date'>Date</label>
+  <input type='date' id='date' name='date' value='<%=@playdate.date%>' /></p>
+
+
+   <p><label>Babies</label>
+   <%current_user.babies.each do |b|%>
+     <input id='<%=b.name%>' type="checkbox" name="babies[]" value="<%=b.id%>" <%='checked' if @playdate.babies.include?(b) %>><%=b.name%>
+    <%end%></p>
+
+  <p><label for='location'>Location:</label>
+  <input type='text' id='location' name='location' value='<%=@playdate.location%>' /></p>
+  <p><label for='zipcode'>Zip Code:</label>
+  <input type='text' id='zipcode' name='zipcode' value='<%=@playdate.zipcode%>'/></p>
+  <p><label for='description'>Description:</label></p>
+
+  <textarea id="description" name="description" rows="4" cols="50">
+   <%=@playdate.description%>
+  </textarea>
+  <br><br>
+  <input type='submit' value='Update the Playdate'>
+  </form>
