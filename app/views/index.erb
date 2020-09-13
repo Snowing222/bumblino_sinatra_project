@@ -1,1 +1,9 @@
 <h1>welcome to bamblino</h2>
+<%@playdates.each do |playdate|%>
+  <%=playdate.title%>
+  <%=playdate.date%>
+  <br>
+<%end%>
+
+<p><a href='/login'>Log In</a></p>
+<p><a href='/signup'>Sign Up</a></p>

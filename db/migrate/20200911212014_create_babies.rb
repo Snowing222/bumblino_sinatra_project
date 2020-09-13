@@ -4,6 +4,7 @@ class CreateBabies < ActiveRecord::Migration
       t.string :name
       t.string :gender
       t.text :about_me
+      t.integer :age
       t.integer :parent_id
     end
   end

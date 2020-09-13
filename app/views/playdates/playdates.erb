@@ -1,0 +1,8 @@
+<h1>Hi, <%=current_user.name%>! Here is all of your babies' playdates!</h1>
+
+<%current_user.playdates.uniq.each_with_index do |p,i|%>
+  <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%> with
+    <%p.babies.each do |b|%>
+    <%=b.name%>
+    <%end%></a>
+<%end%>

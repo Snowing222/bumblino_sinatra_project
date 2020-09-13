@@ -1,0 +1,20 @@
+<h1><%=@playdate.title%> with 
+<%@playdate.babies.each do |b|%>
+  <%=b.name%>
+<%end%></h1>
+<p>Date:<%=@playdate.date%></p>
+<p>Location:<%=@playdate.location%></p>
+<p>Zipcode:<%=@playdate.zipcode%></p>
+<p>More about this playdate:</p>
+<p><%=@playdate.description%></p>
+
+<form>
+  <button formaction="/playdates/<%=@playdate.id%>/edit">Edit Playdate</button>
+</form>
+<br>
+
+<form method="post" action="/playdates/<%=@playdate.id%>">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete playdate">
+</form>
+

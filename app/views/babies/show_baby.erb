@@ -1,0 +1,13 @@
+<h1><%=@baby.name%></h1><br>
+Gender:<%=@baby.gender%><br>
+Age:<%=@baby.age%> years old<br>
+About <%=@baby.name%>:<%=@baby.about_me%><br>
+
+<form>
+  <button formaction="/babies/<%=@baby.slug%>/edit">Edit Profile</button>
+</form>
+
+<form method="post" action="/babies/<%=@baby.slug%>">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete profile">
+</form>

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20200911212724) do
     t.string  "name"
     t.string  "gender"
     t.text    "about_me"
+    t.integer "age"
     t.integer "parent_id"
   end
 
@@ -28,7 +29,7 @@ ActiveRecord::Schema.define(version: 20200911212724) do
   create_table "parents", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
   end
 
   create_table "playdates", force: :cascade do |t|

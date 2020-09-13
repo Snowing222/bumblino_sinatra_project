@@ -1,0 +1,10 @@
+<h1>All babies</h1>
+<%@babies.each do |b|%>
+  <b><%=b.name%></b><br>
+   Gender:<%=b.gender%><br>
+   Age:<%=b.age%> years old<br>
+    About Leo:<%=b.about_me%><br><br>
+<%end%> 
+<br>
+<a href='/babies/new'>Create A Baby Profile</a>   
+  

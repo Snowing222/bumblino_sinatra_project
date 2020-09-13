@@ -3,7 +3,7 @@ class CreateParents < ActiveRecord::Migration
     create_table :parents do |t|
       t.string :name
       t.string :email
-      t.string :password
+      t.string :password_digest
     end
   end
 end
