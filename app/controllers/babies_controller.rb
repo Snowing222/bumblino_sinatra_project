@@ -1,8 +1,7 @@
 class BabiesController < ApplicationController
 
     get '/babies' do
-        if_not_logged_in_redirect_to_index
-        
+        if_not_logged_in_redirect_to_index   
         @babies = current_user.babies
         erb :'/babies/babies'
        
@@ -22,9 +21,9 @@ class BabiesController < ApplicationController
         end
     end
 
-    get '/babies/:name/edit' do
+    get '/babies/:slug/edit' do
         if_not_logged_in_redirect_to_index
-        @baby = Baby.find_by_slug(params["name"])
+        @baby = Baby.find_by_slug(params["slug"])
         if current_user.babies.include?(@baby)
             erb :'babies/edit'
         else
@@ -32,8 +31,9 @@ class BabiesController < ApplicationController
         end
     end
 
-    patch '/babies/:name' do
-        @baby = Baby.find_by_slug(params["name"])
+    patch '/babies/:slug' do
+        binding.pry
+        @baby = Baby.find_by_slug(params["slug"])
         @baby.update(name:params[:name], age:params[:age],gender:params[:gender],about_me:params[:about_me])
         redirect "/babies/#{@baby.slug}"
     end

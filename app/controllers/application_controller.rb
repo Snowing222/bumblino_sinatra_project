@@ -23,16 +23,33 @@ class ApplicationController < Sinatra::Base
       Parent.find(session[:user_id])
     end
 
+    def if_logged_in_redirect_to_user_home
+      if logged_in?
+         redirect "/parents/#{current_user.slug}"
+      end
+    end
+
     def if_not_logged_in_redirect_to_index
       if !logged_in?
         redirect '/'
       end
     end
+    
+    def find_user_account
+      Parent.find_by(email: params[:email])
+    end
 
-    def if_user_email_exist_redirect_to_login
-      email = Parent.find_by(email: params[:email])
-      if email 
-        redirect '/login'
+    def login_authenticated_user_redirect_to_user_home
+      if find_user_account && find_user_account.authenticate(params[:pssword])
+        session[:user_id] = find_user_account.id
+        redirect "/parents/#{current_user.slug}"
+      end
+    end
+
+    def logout_logged_in_user_redirect_to_login
+      if logged_in? 
+         session.clear
+         redirect '/login' 
       end
     end
   end

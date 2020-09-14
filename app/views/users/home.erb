@@ -1,6 +1,6 @@
 <h1><%=@parent.name%>, Welcome to Bamblino! </h1>
-<%@parent.playdates.each do |playdate|%>
-  <%=playdate.title%>
+<%@parent.playdates.each_with_index do |playdate,i|%>
+  <h6><%=i+1%>. <%=playdate.title%></h6>
   <%=playdate.date%>
   <%playdate.babies.each do |b|%>
     <%=b.name%>
@@ -8,5 +8,6 @@
 <%end%>
 <p><a href='/babies'>See All Babies</a></p>
 <p><a href='/babies/new'>Create a New Baby Profile</a></p>
+<p><a href='/playdates'>See All Playdate</a></p>
 <p><a href='/playdates/new'>Create a new playdate</a></p>
 <p><a href='/logout'>Log Out</a></p>

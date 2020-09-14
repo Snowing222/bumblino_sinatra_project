@@ -2,7 +2,7 @@
 <form method='POST' action='/babies/<%=@baby.slug%>'>
   <input type='hidden' id='hidden' name='_method' value='PATCH' />
   <p><label for='name'>Name:</label>
-  <input type='name' id='name' name='name' value='<%=@baby.slug%>' /></p>
+  <input type='name' id='name' name='name' value='<%=@baby.name%>' /></p>
   <p><label for='age'>Age:</label>
   <input type='number' id='age' name='age' min='0' value='<%=@baby.age%>' /></p>
   <p><label for='gender'>Gender:</label>
