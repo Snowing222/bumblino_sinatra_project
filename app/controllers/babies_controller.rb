@@ -23,28 +23,33 @@ class BabiesController < ApplicationController
 
     get '/babies/:slug/edit' do
         if_not_logged_in_redirect_to_index
-        @baby = Baby.find_by_slug(params["slug"])
-        if current_user.babies.include?(@baby)
+        @baby = current_user.babies.find_by_slug(params[:slug])
+        if @baby
             erb :'babies/edit'
         else
-            redirect '/login'
+            erb :'babies/failure'
         end
     end
 
     patch '/babies/:slug' do
         binding.pry
-        @baby = Baby.find_by_slug(params["slug"])
-        @baby.update(name:params[:name], age:params[:age],gender:params[:gender],about_me:params[:about_me])
-        redirect "/babies/#{@baby.slug}"
+        baby = Baby.find_by_slug(params[:slug])
+        baby.update(name:params[:name], age:params[:age],gender:params[:gender],about_me:params[:about_me])
+        redirect "/babies/#{baby.slug}"
     end
 
-    get '/babies/:name' do
-        @baby = Baby.find_by_slug(params["name"])
-        erb :'babies/show_baby'
+    get '/babies/:slug' do
+        if_not_logged_in_redirect_to_index
+        @baby = current_user.babies.find_by_slug(params[:slug])
+        if @baby
+            erb :'babies/show_baby'
+        else
+            erb :'babies/failure'
+        end       
     end
 
-    delete '/babies/:name' do
-        @baby = Baby.find_by_slug(params["name"])
+    delete '/babies/:slug' do
+        @baby = Baby.find_by_slug(params[:slug])
         @baby.destroy
         redirect '/babies'
     end

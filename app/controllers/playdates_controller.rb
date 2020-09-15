@@ -5,14 +5,8 @@ class PlaydatesController < ApplicationController
     end
 
     post '/playdates' do
-        
-        playdate = Playdate.new
-        playdate.title = params['title']
-        playdate.date = params['date']
-        playdate.location = params['location']
-        playdate.zipcode = params['zipcode']
-        playdate.description = params['description']
-        playdate.baby_ids = params['babies']
+        playdate = Playdate.new(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description])
+        playdate.baby_ids = params[:babies]
      
         if  playdate.save
             redirect "/playdates/#{playdate.id}"
@@ -56,15 +50,11 @@ class PlaydatesController < ApplicationController
     end
 
     patch '/playdates/:id' do
-        playdate = Playdate.find_by(id: params[:id])
-        playdate.title = params['title']
-        playdate.date = params['date']
-        playdate.location = params['location']
-        playdate.zipcode = params['zipcode']
-        playdate.description = params['description']
-        playdate.baby_ids = params['babies']
-        redirect "/playdates/#{playdate.id}"
-          
+        binding.pry
+        playdate = current_user.playdates.find_by(id: params[:id])
+        playdate.update(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description])
+        playdate.baby_ids = params[:babies]  
+        redirect "/playdates/#{playdate.id}"        
     end
 
     delete '/playdates/:id' do

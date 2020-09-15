@@ -1,4 +1,5 @@
 require './config/environment'
+require 'pry'
 
 class ApplicationController < Sinatra::Base
 
@@ -40,7 +41,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def login_authenticated_user_redirect_to_user_home
-      if find_user_account && find_user_account.authenticate(params[:pssword])
+      if find_user_account && find_user_account.authenticate(params[:password])
         session[:user_id] = find_user_account.id
         redirect "/parents/#{current_user.slug}"
       end
@@ -52,6 +53,6 @@ class ApplicationController < Sinatra::Base
          redirect '/login' 
       end
     end
-  end
 
+  end
 end
