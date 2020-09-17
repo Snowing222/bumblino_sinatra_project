@@ -3,8 +3,19 @@
   <b><%=b.name%></b><br>
    Gender:<%=b.gender%><br>
    Age:<%=b.age%> years old<br>
-    About <%=b.name%>:<%=b.about_me%><br><br>
+   About <%=b.name%>:<%=b.about_me%><br><br>
+  <form>
+    <button formaction="/babies/<%=b.slug%>/edit">Edit Profile</button>
+  </form>
+
+  <br>
+  <form method="post" action="/babies/<%=b.slug%>">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Profile">
+  </form>
+
+
 <%end%> 
 <br>
-<a href='/babies/new'>Create A Baby Profile</a>   
+ 
   

@@ -2,11 +2,11 @@
 <form method='POST' action='/babies/<%=@baby.slug%>'>
   <input type='hidden' id='hidden' name='_method' value='PATCH' />
   <p><label for='name'>Name:</label>
-  <input type='name' id='name' name='name' value='<%=@baby.name%>' /></p>
+  <input type='name' id='name' name='name' value='<%=@baby.name%>' /><span style = "color:#FF0000;"> *</span></p>
   <p><label for='age'>Age:</label>
   <input type='number' id='age' name='age' min='0' value='<%=@baby.age%>' /></p>
   <p><label for='gender'>Gender:</label>
-  <input type="radio" id="boy" name="gender`" value="boy" <%='checked' if @baby.gender == "boy"%> />
+  <input type="radio" id="boy" name="gender" value="boy" <%='checked' if @baby.gender == "boy"%> />
   <label for="boy">Boy</label>
   <input type="radio" id="girl" name="gender" value="girl" <%='checked' if @baby.gender == "girl"%> >
   <label for="girl">Girl</label><br>

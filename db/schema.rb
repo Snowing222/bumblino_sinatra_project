@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20200911212724) do
     t.string   "location"
     t.integer  "zipcode"
     t.text     "description"
+    t.integer  "parent_id"
   end
 
 end

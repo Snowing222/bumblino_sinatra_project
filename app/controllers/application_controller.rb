@@ -1,5 +1,7 @@
 require './config/environment'
 require 'pry'
+# require 'sinatra/base'
+# require 'sinatra/flash'
 
 class ApplicationController < Sinatra::Base
 
@@ -8,20 +10,26 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "password_security"
+    register Sinatra::Flash
+   
   end
 
   get '/' do
-    @playdates = Playdate.all
-    erb :index
+    if logged_in?
+      redirect "/parents/#{current_user.slug}"
+    else
+      @playdates = Playdate.all
+      erb :index
+    end
   end
 
   helpers do 
     def logged_in?
-      session[:user_id]
+      !!current_user
     end
 
     def current_user
-      Parent.find(session[:user_id])
+      Parent.find_by(id:session[:user_id])
     end
 
     def if_logged_in_redirect_to_user_home
@@ -52,6 +60,10 @@ class ApplicationController < Sinatra::Base
          session.clear
          redirect '/login' 
       end
+    end
+
+    def delete_user_dup_playdates
+      current_user.playdates.uniq
     end
 
   end
