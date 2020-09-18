@@ -35,8 +35,7 @@ class BabiesController < ApplicationController
     end
 
     patch '/babies/:slug' do
-      
-        baby = Baby.find_by_slug(params[:slug])
+       baby = Baby.find_by_slug(params[:slug])
         if baby.update(name:params[:name], age:params[:age], gender:params[:gender],about_me:params[:about_me])
             flash[:success] = "You have successfully updated the record"
             redirect "/babies/#{baby.slug}"
