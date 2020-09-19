@@ -6,7 +6,7 @@ class CreatePlaydates < ActiveRecord::Migration
       t.string :location
       t.integer :zipcode
       t.text :description
-      t.integer :creator_id
+      t.integer :parent_id
     end
   end
 end

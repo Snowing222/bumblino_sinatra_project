@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200911212724) do
+ActiveRecord::Schema.define(version: 20200919131021) do
 
   create_table "babies", force: :cascade do |t|
     t.string  "name"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20200911212724) do
 
   create_table "baby_playdates", force: :cascade do |t|
     t.integer "baby_id"
+    t.integer "playdate_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text    "content"
+    t.integer "parent_id"
     t.integer "playdate_id"
   end
 
@@ -38,7 +44,7 @@ ActiveRecord::Schema.define(version: 20200911212724) do
     t.string   "location"
     t.integer  "zipcode"
     t.text     "description"
-    t.integer  "creator_id"
+    t.integer  "parent_id"
   end
 
 end
