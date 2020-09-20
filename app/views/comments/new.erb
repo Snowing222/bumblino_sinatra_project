@@ -25,18 +25,20 @@
   <br>
   <input type="submit" value="submit">
 </form>
+
 <br><br>
+
 <%if !@playdate.comments.empty?%>
   <p>Comment:</p>
-  <ul>
+
   <%@playdate.comments.each do |c|%>
     <li><a href="/parents/<%=c.commentor.slug%>"><%=c.commentor.name%></a> says <%=c.content%></li>
-    <% if c.commentor == current_user%>
-    <form method="post" action="/comments/<%=c.id%>">
-      <input type="hidden" id="hidden" name="_method" value="delete">
-       <input type="submit" value="delete comment">
-    </form>
-  <%end%>
-  </ul>
+       <% if c.commentor == current_user%>
+         <form method="post" action="/comments/<%=c.id%>">
+           <input type="hidden" id="hidden" name="_method" value="delete">
+           <input type="submit" value="delete comment">
+         </form>
+       <%end%>
+    <%end%> 
 <%end%>
 
