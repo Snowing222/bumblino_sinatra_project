@@ -1,3 +1,4 @@
+-Comment Feature
 Parent 
 Playdate parent_id
 Comment  parent_id  playdate_id
@@ -23,6 +24,20 @@ belongs_to :commentor, :class_name => "Parent", :foreign_key => "parent_id" -->
 
 Comment belongs to commentor(parent),classname:parent, foreign key:parent_id
 Comment belongs to playdate
+
+
+-attend Feature
+parent
+playdate_attend  parent_id playdate_id
+playdate(attended_playdate)
+
+parent has many playdate_attends
+parent has many attended_playdate through playdate_attends,source playdate_id
+
+playdate has many playdate_attend
+playdate has many attanded_parent through playdate_attends,source parent_id
+
+
 
 
 

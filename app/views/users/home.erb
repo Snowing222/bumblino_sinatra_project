@@ -1,8 +1,25 @@
 <h2><%=@parent.name%>, Welcome to Bamblino! </h2>
-<%@parent.playdates.each_with_index do |playdate,i|%>
+
+<%Playdate.all.each_with_index do |playdate,i|%>
   <h3><a href="/playdates/<%=playdate.id%>"><%=i+1%>. <%=playdate.title%></a></h3>
+   <% if playdate.creator == current_user%>
+    <form style='display:inline;'>
+      <button formaction="/playdates/<%=playdate.id%>/edit">Edit Playdate</button>
+    </form>
+
+
+    <form method="post" action="/playdates/<%=playdate.id%>" style='display:inline;'>
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="delete playdate">
+    </form>
+  <%end%>
   <h6><%=playdate.date%><br></h6>
+
   - with <%playdate.babies.each do |b|%>
     <%=b.name%>
   <%end%>
+  <br>
+
+  <a href='/comments/<%=playdate.id%>/new'><%=playdate.comments.count%> comments<a>
+
 <%end%>

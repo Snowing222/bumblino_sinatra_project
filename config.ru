@@ -8,4 +8,5 @@ use Rack::MethodOverride
 use UsersController
 use PlaydatesController
 use BabiesController
+use CommentsController
 run ApplicationController

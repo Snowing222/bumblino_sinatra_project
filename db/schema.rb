@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200919131021) do
+ActiveRecord::Schema.define(version: 20200920135704) do
+
+  create_table "attend_playdates", force: :cascade do |t|
+    t.integer "parent_id"
+    t.integer "playdate_id"
+  end
 
   create_table "babies", force: :cascade do |t|
     t.string  "name"

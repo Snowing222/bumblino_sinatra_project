@@ -18,11 +18,15 @@
 
     <div class="nav">
     <%if logged_in?%>
+      <a href='/parents/<%=current_user.slug%>'>Home Page</a>
       <a href='/babies'>All Babies</a>
       <a href='/babies/new'>Create a New Baby Profile</a>
       <a href='/playdates'>All Playdate</a>
       <a href='/playdates/new'>Create a new playdate</a>
-      <a href='/logout'>Log Out</a>
+     
+      <form>
+         <button formaction='/logout'>Log Out</button>
+      </form>
     <%end%>
     </div>
 

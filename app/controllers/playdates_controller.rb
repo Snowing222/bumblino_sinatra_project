@@ -7,7 +7,7 @@ class PlaydatesController < ApplicationController
     
     #post new playdate to db/create instance-both attributes & relation
     post '/playdates' do
-        @playdate = current_user.playdates.new(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description])
+        @playdate = current_user.created_playdates.new(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description])
         
         if  !params[:babies].nil? && @playdate.save
             params[:babies]. each do |baby_id|
@@ -26,14 +26,14 @@ class PlaydatesController < ApplicationController
     #find all playdates for current user
     get '/playdates' do
         if_not_logged_in_redirect_to_index
-        @playdates = current_user.playdates
+        @playdates = current_user.created_playdates
         erb :'playdates/playdates'
     end
     
     #
     get '/playdates/:id/edit' do
         if_not_logged_in_redirect_to_index
-        @playdate = current_user.playdates.find_by(id: params[:id])
+        @playdate = current_user.created_playdates.find_by(id: params[:id])
         if @playdate
             erb :'playdates/edit_playdate'
         else
@@ -43,7 +43,7 @@ class PlaydatesController < ApplicationController
     end
 
     patch '/playdates/:id' do
-        playdate = current_user.playdates.find_by(id: params[:id])
+        playdate = current_user.created_playdates.find_by(id: params[:id])
         playdate.update(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description])
         if playdate &&  !playdate.baby_ids.nil?
            playdate.baby_ids = params[:babies]  
@@ -59,7 +59,7 @@ class PlaydatesController < ApplicationController
     get '/playdates/:id' do
         if_not_logged_in_redirect_to_index
     
-        @playdate = current_user.playdates.find_by(id: params[:id])
+        @playdate = Playdate.find_by(id: params[:id])
         if @playdate
             erb :'playdates/show_playdate'
         else

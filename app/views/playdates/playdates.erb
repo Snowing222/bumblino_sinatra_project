@@ -1,10 +1,23 @@
 <h1>Hi, <%=current_user.name%>! Here is all of your babies' playdates!</h1>
 
-<%current_user.playdates.each_with_index do |p,i|%>
+<%current_user.created_playdates.each_with_index do |p,i|%>
   <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%> with
     <%p.babies.each do |b|%>
     <%=b.name%>
-    <%end%></a>
+    <%end%></a></h2>
+    
+    <form style='display:inline;'>
+      <button formaction="/playdates/<%=p.id%>/edit">Edit Playdate</button>
+    </form>
+
+
+    <form method="post" action="/playdates/<%=p.id%>" style='display:inline;'>
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="delete playdate">
+    </form>
+    
+
+
 <%end%>
 <br>
 <br>

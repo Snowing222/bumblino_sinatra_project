@@ -7,4 +7,7 @@ class Playdate < ActiveRecord::Base
     has_many :comments
     # has_many :commentors, :class_name => "Parent", :foreign_key => "parent_id", through: :comments
     has_many :commentors, through: :comments, source: :commentor
-end;
+
+    has_many :attend_playdates
+    has_many :attended_parents, through: :attend_playdates, source: :parent
+end
