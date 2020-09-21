@@ -12,17 +12,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
+    <script>
+       function rsvp() {
+            document.getElementById("rsvp").innerHTML = "RSVP'D";
+        }
+        function rsvpd() {
+            document.getElementById("rsvpd").innerHTML = "RSVP";
+        }
+    </script>
   </head>
   <body>
     <div class="wrapper">
 
     <div class="nav">
     <%if logged_in?%>
-      <a href='/parents/<%=current_user.slug%>'>Home Page</a>
-      <a href='/babies'>All Babies</a>
-      <a href='/babies/new'>Create a New Baby Profile</a>
-      <a href='/playdates'>All Playdate</a>
-      <a href='/playdates/new'>Create a new playdate</a>
+      <a href='/parents/<%=current_user.slug%>'>Home Page</a> &nbsp;
+      <a href='/babies'>All Babies</a> &nbsp;
+      <a href='/babies/new'>Create a New Baby Profile</a> &nbsp;
+      <a href='/playdates'>All organize Playdates </a> &nbsp;
+      <a href='/attend_playdates'>All attend Playdates </a> &nbsp;
+      <a href='/playdates/new'>Create a new playdate</a> &nbsp;
      
       <form>
          <button formaction='/logout'>Log Out</button>

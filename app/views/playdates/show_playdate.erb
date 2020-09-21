@@ -2,6 +2,12 @@
 <%@playdate.babies.each do |b|%>
   <%=b.name%>
 <%end%></h1>
+<p>playdate owner: <a href='/parents/<%=current_user.slug%>'><%=current_user.name%></a><p>
+<p>playdate attendees: <% @playdate.attended_parents.each do |p|%>
+                         <a href='/parents/<%=p.slug%>'><%=p.name%></a>
+                         &nbsp; &nbsp;
+                       <%end%></p>
+
 <% if @playdate.creator == current_user%>
 <form style='display:inline;'>
   <button formaction="/playdates/<%=@playdate.id%>/edit">Edit Playdate</button>
@@ -12,11 +18,24 @@
   <input type="submit" value="delete playdate">
 </form>
 <%end%>
+
+<%if current_user.attended_playdates.include?(@playdate)%>
+  <form method="post" action="/attend_playdates/<%=@playdate.id%>">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="cancel RSVP">
+  </form>
+    
+<%else%>
+  <form style='color:green;' >
+      button formaction="/playdates/<%=@playdate.id%>">RSVP</button>
+  </form>
+<%end%>
+
+<br>
 <p>Date:<%=@playdate.date%></p>
 <p>Location:<%=@playdate.location%></p>
 <p>Zipcode:<%=@playdate.zipcode%></p>
 <p>More about this playdate:</p>
 <p><%=@playdate.description%></p>
-
 
 

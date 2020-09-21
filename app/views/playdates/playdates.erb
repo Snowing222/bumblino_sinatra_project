@@ -1,4 +1,4 @@
-<h1>Hi, <%=current_user.name%>! Here is all of your babies' playdates!</h1>
+<h1>Hi, <%=current_user.name%>! All playdates you organize!</h1>
 
 <%current_user.created_playdates.each_with_index do |p,i|%>
   <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%> with

@@ -1,0 +1,20 @@
+<h1>Playdate Detail</h1>
+<h2><%=@playdate.title%> with 
+<%@playdate.babies.each do |b|%>
+  <%=b.name%>
+<%end%></h2>
+<p>Date:<%=@playdate.date%></p>
+<p>Location:<%=@playdate.location%></p>
+<p>Zipcode:<%=@playdate.zipcode%></p>
+<p>More about this playdate:</p>
+<p><%=@playdate.description%></p>
+<hr>
+
+<h3>Interested to rsvp for your little ones?</h3>
+<form method="post" action="/attend_playdates/<%=@playdate.id%>">
+<p><label>Babies</label>
+   <%current_user.babies.each do |b|%>
+     <input id='<%=b.name%>' type="checkbox" name="babies[]" value="<%=b.id%>"><%=b.name%>
+<%end%></p>
+<input type='submit' value='RSVP'>
+</form>
