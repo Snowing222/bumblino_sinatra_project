@@ -1,12 +1,16 @@
-<h1><%=@playdate.title%> with 
-<%@playdate.babies.each do |b|%>
-  <%=b.name%>
-<%end%></h1>
+<h1><%=@playdate.title%></h1>
+<p>Date:<%=@playdate.date%></p>
 <p>playdate owner: <a href='/parents/<%=current_user.slug%>'><%=current_user.name%></a><p>
-<p>playdate attendees: <% @playdate.attended_parents.each do |p|%>
-                         <a href='/parents/<%=p.slug%>'><%=p.name%></a>
-                         &nbsp; &nbsp;
-                       <%end%></p>
+<p>Owner's baby: 
+  <%@playdate.babies.each do |b|%>
+    <a href="/babies/<%=b.slug%>"><%=b.name%></a>
+    &nbsp; &nbsp;
+  <%end%></p>
+<p>playdate attendees: 
+  <% @playdate.attended_parents.each do |p|%>
+    <a href='/parents/<%=p.slug%>'><%=p.name%></a>
+    &nbsp; &nbsp;
+  <%end%></p>
 
 <% if @playdate.creator == current_user%>
 <form style='display:inline;'>
@@ -17,9 +21,9 @@
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="delete playdate">
 </form>
-<%end%>
 
-<%if current_user.attended_playdates.include?(@playdate)%>
+
+<%elsif current_user.attended_playdates.include?(@playdate)%>
   <form method="post" action="/attend_playdates/<%=@playdate.id%>">
     <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="cancel RSVP">
@@ -27,15 +31,40 @@
     
 <%else%>
   <form style='color:green;' >
-      button formaction="/playdates/<%=@playdate.id%>">RSVP</button>
+    <button formaction="/playdates/<%=@playdate.id%>">RSVP</button>
   </form>
 <%end%>
 
 <br>
-<p>Date:<%=@playdate.date%></p>
+<br>
 <p>Location:<%=@playdate.location%></p>
 <p>Zipcode:<%=@playdate.zipcode%></p>
 <p>More about this playdate:</p>
 <p><%=@playdate.description%></p>
+
+<%if !@playdate.comments.empty?%>
+  <p><b>Comment:</b></p>
+    <%@playdate.comments.each do |c|%>
+      <li><a href="/parents/<%=c.commentor.slug%>"><%=c.commentor.name%></a> says: <%=c.content%>
+        <% if c.commentor == current_user%>
+        <form method="post" action="/playdates/<%=@playdate.id%>/comments/<%=c.id%>">
+          <input type="hidden" id="hidden" name="_method" value="delete">
+          <input type="submit" value="delete comment">
+        </form>
+        <%end%></li>
+    <%end%>
+ 
+    <br><br>
+<%end%>
+<br><br><br>
+<p><b>add a comments:</b></p>
+<form method='post' action="/playdates/<%=@playdate.id%>/comments">
+  <textarea id="content" name="content" rows="4" cols="50">
+   Write a comments...
+  </textarea>
+  <br>
+  <input type="submit" value="submit">
+</form>
+
 
 

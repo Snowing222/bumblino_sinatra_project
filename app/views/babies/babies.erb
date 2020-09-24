@@ -1,4 +1,5 @@
 <h1>All babies</h1>
+<a href="/babies/new"> Create a new baby profile</a>
 <%@babies.each do |b|%>
   <b><%=b.name%></b><br>
    Gender:<%=b.gender%><br>
@@ -14,8 +15,9 @@
     <input type="submit" value="Delete Profile">
   </form>
 
-
 <%end%> 
+<br><br>
+
 <br>
  
   

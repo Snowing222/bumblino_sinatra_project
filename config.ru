@@ -9,5 +9,4 @@ use UsersController
 use PlaydatesController
 use BabiesController
 use CommentsController
-use AttendPlaydatesController
 run ApplicationController

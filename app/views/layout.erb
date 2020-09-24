@@ -10,8 +10,11 @@
     <title>BumblinoSinatraApp</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <%# <link rel="stylesheet" href="/stylesheets/main.css" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> %>
     <script>
        function rsvp() {
             document.getElementById("rsvp").innerHTML = "RSVP'D";
@@ -21,24 +24,37 @@
         }
     </script>
   </head>
+
   <body>
-    <div class="wrapper">
 
-    <div class="nav">
-    <%if logged_in?%>
-      <a href='/parents/<%=current_user.slug%>'>Home Page</a> &nbsp;
-      <a href='/babies'>All Babies</a> &nbsp;
-      <a href='/babies/new'>Create a New Baby Profile</a> &nbsp;
-      <a href='/playdates'>All organize Playdates </a> &nbsp;
-      <a href='/attend_playdates'>All attend Playdates </a> &nbsp;
-      <a href='/playdates/new'>Create a new playdate</a> &nbsp;
-     
-      <form>
-         <button formaction='/logout'>Log Out</button>
-      </form>
-    <%end%>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">BabyBang</a>
     </div>
+    <%if logged_in?%>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/parents/<%=current_user.slug%>">Home</a></li>
+      <li><a href="/babies">Your Babies</a></li>
+      <li><a href="/playdates">Your Playdates</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/logout"><span class="glyphicon glyphicon-user"></span> Log Out</a></li>
+    </ul>
+    <%else%>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/login"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+      <li><a href="/Signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+    <%end%>
+  </div>
+</nav>
+  
+  
 
+
+      
+      <div class="message">
         <%if flash[:error]%>
           <h3 style="color:red;"><%=flash[:error]%></h3>
         <%end%>
@@ -46,18 +62,26 @@
         <%if flash[:success]%>
           <h3 style="color:green;"><%=flash[:success]%></h3>
         <%end%>
+      </div>
 
-        <%= yield %>
+      <%= yield %>
 
       <footer class="branding">
         <small>&copy; 2020 <strong>BumblinoSinatraApp</strong></small>
       </footer>
-    </div>
+ 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <%# <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> %>
+    
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
       <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
     <![endif]-->
   </body>
 </html>
+
+

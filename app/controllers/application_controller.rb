@@ -18,6 +18,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect "/parents/#{current_user.slug}"
     else
+      flash[:error] = "Please Sign Up or Log in to see more information"
       @playdates = Playdate.all
       erb :index
     end

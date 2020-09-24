@@ -1,10 +1,6 @@
-<h1>welcome to bamblino</h1>
-<h2>All Playdates</h2>
+<h1>All Playdates</h1>
 <%@playdates.each_with_index do |playdate, i|%>
-  <%=i+1%>. <%=playdate.title%>
+  <%=i+1%>. <a href="playdates/<%=playdate.id%>"><%=playdate.title%></a>
   on <%=playdate.date%>
   <br>
 <%end%>
-
-<p><a href='/login'>Log In</a></p>
-<p><a href='/signup'>Sign Up</a></p>

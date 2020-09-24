@@ -6,7 +6,7 @@ About <%=@baby.name%>:<%=@baby.about_me%><br>
 <form>
   <button formaction="/babies/<%=@baby.slug%>/edit">Edit Profile</button>
 </form>
-
+<br>
 <form method="post" action="/babies/<%=@baby.slug%>">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="delete profile">

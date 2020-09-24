@@ -1,10 +1,10 @@
-<h1>Hi, <%=current_user.name%>! All playdates you organize!</h1>
-
-<%current_user.created_playdates.each_with_index do |p,i|%>
-  <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%> with
-    <%p.babies.each do |b|%>
-    <%=b.name%>
-    <%end%></a></h2>
+<h1>Upcoming playdates</h1>
+<a href="/playdates/new"> Create a new playdate</a>
+<%if !@playdates.nil? %>
+  <%@playdates.each_with_index do |p,i|%>
+    <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%> </a> 
+    <small class="text-info">as Organizer</small><br>
+    </h2>
     
     <form style='display:inline;'>
       <button formaction="/playdates/<%=p.id%>/edit">Edit Playdate</button>
@@ -14,11 +14,27 @@
     <form method="post" action="/playdates/<%=p.id%>" style='display:inline;'>
       <input id="hidden" type="hidden" name="_method" value="DELETE">
       <input type="submit" value="delete playdate">
-    </form>
-    
-
-
+    </form>    
+  <%end%>
 <%end%>
+
+<%if !@attended_playdates.nil? %>
+  <% @attended_playdates.each_with_index do |p,i|%>
+    <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%></a>
+    <small class="text-info">as Attendee</small><br>
+    </h2>
+
+    <form method="post" action="/attend_playdates/<%=p.id%>">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <button id="rsvpd" onclick="rsvpd()">RSVP'd</button>
+    </form>
+
+  <%end%>
+<%end%>
+
+
+
+
 <br>
 <br>
 
