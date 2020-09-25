@@ -24,14 +24,7 @@ class PlaydatesController < ApplicationController
      end
   
     #find all playdates for current user
-    get '/playdates' do
-        if_not_logged_in_redirect_to_index
-        @playdates = current_user.created_playdates
-        @attended_playdates = current_user.attended_playdates
-        erb :'playdates/playdates'
-    end
     
-    #
     get '/playdates/:id/edit' do
         if_not_logged_in_redirect_to_index
         @playdate = current_user.created_playdates.find_by(id: params[:id])
@@ -56,6 +49,13 @@ class PlaydatesController < ApplicationController
         end
     end
 
+    get '/playdates' do
+        if_not_logged_in_redirect_to_index
+        @playdates = current_user.created_playdates
+        @attended_playdates = current_user.attended_playdates
+        erb :'playdates/playdates'
+    end
+
     #find target playdate, and render show page
     get '/playdates/:id' do
         if_not_logged_in_redirect_to_index
@@ -74,17 +74,16 @@ class PlaydatesController < ApplicationController
         flash[:error] = "The playdate is successfully deleted"
         redirect '/playdates'
     end
+
+    get '/attend_playdates/:id/new' do
+        @playdate = Playdate.find_by(id: params[:id])
+        erb :'attend_playdates/new'
+    end
   
     delete '/attend_playdates/:id' do
         playdate = Playdate.find_by(id: params[:id])
         current_user.attended_playdates.delete(playdate)
         redirect "/playdates"
-    end
-    
-
-    get '/attend_playdates/:id/new' do
-        @playdate = Playdate.find_by(id: params[:id])
-        erb :'attend_playdates/new'
     end
 
     post '/attend_playdates/:id' do
@@ -93,12 +92,6 @@ class PlaydatesController < ApplicationController
         flash[:success] = "You are all set for this playdate"
         redirect "/playdates"
     end
-
-    # get '/attend_playdates' do
-    #     @attended_playdates = current_user.attended_playdates
-    #     erb :'/attend_playdates/attend_playdates'
-    # end
-
-  
+    
 end
   

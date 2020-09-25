@@ -1,8 +1,0 @@
-<h1>Playdates Coming up</h1>
-
-<% @attended_playdates.each_with_index do |p,i|%>
-  <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%> with
-    <%p.babies.each do |b|%>
-    <%=b.name%>
-    <%end%></a></h2>  
-<%end%>

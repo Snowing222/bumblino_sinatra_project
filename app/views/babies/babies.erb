@@ -1,18 +1,17 @@
 <h1>All babies</h1>
-<a href="/babies/new"> Create a new baby profile</a>
+<a href="/babies/new" class="lead"> Create a new baby profile</a>
+<br>
 <%@babies.each do |b|%>
-  <b><%=b.name%></b><br>
+  <b><h4><%=b.name%></h4></b>
    Gender:<%=b.gender%><br>
    Age:<%=b.age%> years old<br>
    About <%=b.name%>:<%=b.about_me%><br><br>
-  <form>
-    <button formaction="/babies/<%=b.slug%>/edit">Edit Profile</button>
-  </form>
 
-  <br>
-  <form method="post" action="/babies/<%=b.slug%>">
+  <a href="/babies/<%=b.slug%>/edit" class="btn btn-default btn-xs" role="button">Edit Profile</a>
+
+  <form style='display:inline;' method="post" action="/babies/<%=b.slug%>">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Profile">
+    <input type="submit" class="btn btn-default btn-xs" value="Delete Profile">
   </form>
 
 <%end%> 
