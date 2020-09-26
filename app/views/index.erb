@@ -1,6 +1,6 @@
 <h1>All Playdates</h1>
 <%@playdates.each_with_index do |playdate, i|%>
-  <%=i+1%>. <a href="playdates/<%=playdate.id%>"><%=playdate.title%></a>
+  <h3><%=i+1%>. <a href="playdates/<%=playdate.id%>"><%=playdate.title%></a></h3>
   on <%=playdate.date%>
   <br>
 <%end%>

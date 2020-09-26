@@ -41,7 +41,7 @@ class PlaydatesController < ApplicationController
         playdate.update(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description])
         if playdate &&  !playdate.baby_ids.nil?
            playdate.baby_ids = params[:babies]  
-           flash[:success] = "You have successfully updated playdate"
+           flash[:success] = "You have successfully updated the playdate"
            redirect "/playdates/#{playdate.id}"  
         else
             flash[:success] = "Please fill in information for all * area"

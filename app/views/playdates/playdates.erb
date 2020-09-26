@@ -1,5 +1,5 @@
 <h1>Upcoming playdates</h1>
-<a href="/playdates/new" class="lead"> Create a new playdate</a>
+<a href="/playdates/new" class="lead bg-info"> Create a new playdate</a>
 <%if !@playdates.nil? %>
   <%@playdates.each do |p|%>
     <h3><a href='/playdates/<%=p.id%>'><%=p.title%> </a> 
