@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
    #render sign up form, if user is not currently login
-  get '/signup' do
+ get '/signup' do
     if_logged_in_redirect_to_user_home
     erb :'users/create_user'
  end

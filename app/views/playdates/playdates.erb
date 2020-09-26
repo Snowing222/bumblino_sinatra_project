@@ -1,32 +1,29 @@
 <h1>Upcoming playdates</h1>
-<a href="/playdates/new"> Create a new playdate</a>
+<a href="/playdates/new" class="lead"> Create a new playdate</a>
 <%if !@playdates.nil? %>
-  <%@playdates.each_with_index do |p,i|%>
-    <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%> </a> 
-    <small class="text-info">as Organizer</small><br>
-    </h2>
+  <%@playdates.each do |p|%>
+    <h3><a href='/playdates/<%=p.id%>'><%=p.title%> </a> 
+    <abbr><h5 class="text-info">as Organizer</h5></abbr>
+    </h3>
     
-    <form style='display:inline;'>
-      <button formaction="/playdates/<%=p.id%>/edit">Edit Playdate</button>
-    </form>
+    <a href="/playdates/<%=p.id%>/edit" class="btn btn-default btn-xs" role="button">Edit Playdate</a>
 
-
-    <form method="post" action="/playdates/<%=p.id%>" style='display:inline;'>
+    <form style='display:inline;' method="post" action="/playdates/<%=p.id%>">
       <input id="hidden" type="hidden" name="_method" value="DELETE">
-      <input type="submit" value="delete playdate">
-    </form>    
+      <input type="submit" class="btn btn-default btn-xs" value="Delete Playdate">
+    </form>  
   <%end%>
 <%end%>
 
 <%if !@attended_playdates.nil? %>
-  <% @attended_playdates.each_with_index do |p,i|%>
-    <h2><a href='/playdates/<%=p.id%>'><%=i+1%>. <%=p.title%></a>
-    <small class="text-info">as Attendee</small><br>
-    </h2>
+  <% @attended_playdates.each do |p|%>
+    <h3><a href='/playdates/<%=p.id%>'><%=p.title%></a>
+    <abbr><h5 class="text-info">as Attendee</h5></abbr>
+    </h3>
 
     <form method="post" action="/attend_playdates/<%=p.id%>">
       <input type="hidden" id="hidden" name="_method" value="delete">
-      <button id="rsvpd" onclick="rsvpd()">RSVP'd</button>
+      <button id="rsvpd" onclick="rsvpd()" class="btn btn-default btn-xs">RSVP'd</button>
     </form>
 
   <%end%>

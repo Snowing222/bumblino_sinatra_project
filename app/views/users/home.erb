@@ -4,22 +4,22 @@
   <h3><a href="/playdates/<%=playdate.id%>"><%=i+1%>. <%=playdate.title%></a></h3>
     <% if playdate.creator == current_user%>
       <form style='display:inline;'>
-        <button formaction="/playdates/<%=playdate.id%>/edit">Edit Playdate</button>
+        <button formaction="/playdates/<%=playdate.id%>/edit" class="btn btn-default btn-xs">Edit Playdate</button>
       </form>
 
       <form method="post" action="/playdates/<%=playdate.id%>" style='display:inline;'>
         <input id="hidden" type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="delete playdate">
+        <input type="submit" value="delete playdate" class="btn btn-default btn-xs">
       </form>
 
     <%elsif current_user.attended_playdates.include?(playdate)%>
         <form method="post" action="/attend_playdates/<%=playdate.id%>">
         <input type="hidden" id="hidden" name="_method" value="delete">
-        <button id="rsvpd" onclick="rsvpd()">RSVP'd</button>
+        <button id="rsvpd" onclick="rsvpd()" class="btn btn-default btn-xs">RSVP'd</button>
         </form>
     <%else%>
         <form action="/attend_playdates/<%=playdate.id%>/new">
-            <button id="rsvp" onclick="rsvp()">RSVP</button>
+            <button id="rsvp" onclick="rsvp()" class="btn btn-default btn-xs">RSVP</button>
         </form>   
     <%end%>
 

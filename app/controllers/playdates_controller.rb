@@ -83,6 +83,7 @@ class PlaydatesController < ApplicationController
     delete '/attend_playdates/:id' do
         playdate = Playdate.find_by(id: params[:id])
         current_user.attended_playdates.delete(playdate)
+        flash[:error] = "You are successfully unattend ths playdate. RSVP if you change your mind!"
         redirect "/playdates"
     end
 
@@ -92,6 +93,6 @@ class PlaydatesController < ApplicationController
         flash[:success] = "You are all set for this playdate"
         redirect "/playdates"
     end
-    
+
 end
   
