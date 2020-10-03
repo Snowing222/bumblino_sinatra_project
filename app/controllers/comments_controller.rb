@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+    before do
+        if_not_logged_in_redirect_to_index
+    end
 
     post '/playdates/:id/comments' do
         @playdate = Playdate.find_by(id: params[:id])
@@ -12,7 +15,6 @@ class CommentsController < ApplicationController
     end
 
     delete '/playdates/:playdate_id/comments/:comment_id' do
-        if_not_logged_in_redirect_to_index
         comment = current_user.comments.find_by(id:params[:comment_id])
         comment.delete
         flash[:success] = "Comment is deleted successfully"

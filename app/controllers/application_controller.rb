@@ -71,5 +71,11 @@ class ApplicationController < Sinatra::Base
       @playdate = current_user.created_playdates.find_by(id: params[:id])
     end
 
+    def set_baby
+      @baby = current_user.babies.find_by_slug(params[:slug])
+    end
+
+
+
   end
 end

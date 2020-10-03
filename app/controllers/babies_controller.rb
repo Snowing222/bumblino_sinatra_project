@@ -1,15 +1,15 @@
 class BabiesController < ApplicationController
+    before do
+        if_not_logged_in_redirect_to_index
+    end
     
-    
-    get '/babies' do
-        if_not_logged_in_redirect_to_index   
+    get '/babies' do  
         @babies = current_user.babies
         erb :'/babies/babies'
        
     end
 
     get '/babies/new' do
-        if_not_logged_in_redirect_to_index
         erb :'babies/new'
     end
 
@@ -25,8 +25,7 @@ class BabiesController < ApplicationController
     end
 
     get '/babies/:slug/edit' do
-        if_not_logged_in_redirect_to_index
-        @baby = current_user.babies.find_by_slug(params[:slug])
+        set_baby
         if @baby
             erb :'babies/edit'
         else
@@ -36,10 +35,10 @@ class BabiesController < ApplicationController
     end
 
     patch '/babies/:slug' do
-       baby = Baby.find_by_slug(params[:slug])
-        if baby.update(name:params[:name], age:params[:age], gender:params[:gender],about_me:params[:about_me])
+       set_baby
+        if @baby.update(name:params[:name], age:params[:age], gender:params[:gender],about_me:params[:about_me])
             flash[:success] = "You have successfully updated the record"
-            redirect "/babies/#{baby.slug}"
+            redirect "/babies/#{@baby.slug}"
         elsif 
            flash[:error] = "Please fill in information for all * area"
            redirect "/babies/#{params[:slug]}/edit"
@@ -47,8 +46,7 @@ class BabiesController < ApplicationController
     end
 
     get '/babies/:slug' do
-        if_not_logged_in_redirect_to_index
-        @baby = current_user.babies.find_by_slug(params[:slug])
+       set_baby
         if @baby
             erb :'babies/show_baby'
         else
@@ -58,7 +56,7 @@ class BabiesController < ApplicationController
     end
 
     delete '/babies/:slug' do
-        @baby = Baby.find_by_slug(params[:slug])
+        set_baby
         @baby.destroy
         flash[:success] = "You have successfully deleted the record"
         redirect '/babies'
