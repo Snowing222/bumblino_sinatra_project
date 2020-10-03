@@ -1,5 +1,6 @@
 class BabiesController < ApplicationController
-
+    
+    
     get '/babies' do
         if_not_logged_in_redirect_to_index   
         @babies = current_user.babies

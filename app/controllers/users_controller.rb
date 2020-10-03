@@ -6,6 +6,7 @@ class UsersController < ApplicationController
  end
 
  post '/signup' do
+   binding.pry
     parent = Parent.new(params)
     if find_user_account  
         flash[:error] = "User account exists, Please log in"

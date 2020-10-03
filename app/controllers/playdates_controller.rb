@@ -27,7 +27,7 @@ class PlaydatesController < ApplicationController
     
     get '/playdates/:id/edit' do
         if_not_logged_in_redirect_to_index
-        @playdate = current_user.created_playdates.find_by(id: params[:id])
+        set_playdate
         if @playdate
             erb :'playdates/edit_playdate'
         else
@@ -37,7 +37,7 @@ class PlaydatesController < ApplicationController
     end
 
     patch '/playdates/:id' do
-        playdate = current_user.created_playdates.find_by(id: params[:id])
+        set_playdate
         playdate.update(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description])
         if playdate.update(title:params[:title],date:params[:date],location:params[:location],zipcode:params[:zipcode],description:params[:description]) &&  !playdate.baby_ids.nil?
            playdate.baby_ids = params[:babies]  
@@ -83,7 +83,7 @@ class PlaydatesController < ApplicationController
     delete '/attend_playdates/:id' do
         playdate = Playdate.find_by(id: params[:id])
         current_user.attended_playdates.delete(playdate)
-        flash[:error] = "You are successfully unattend ths playdate. RSVP if you change your mind!"
+        flash[:error] = "You are successfully unattend this playdate. RSVP if you change your mind!"
         redirect "/playdates"
     end
 

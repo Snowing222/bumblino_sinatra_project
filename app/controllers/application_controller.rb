@@ -67,5 +67,9 @@ class ApplicationController < Sinatra::Base
       current_user.playdates.uniq
     end
 
+    def set_playdate
+      @playdate = current_user.created_playdates.find_by(id: params[:id])
+    end
+
   end
 end

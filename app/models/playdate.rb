@@ -5,7 +5,6 @@ class Playdate < ActiveRecord::Base
    
     belongs_to :creator, class_name: "Parent", foreign_key: "parent_id"
     has_many :comments
-    # has_many :commentors, :class_name => "Parent", :foreign_key => "parent_id", through: :comments
     has_many :commentors, through: :comments, source: :commentor
 
     has_many :attend_playdates

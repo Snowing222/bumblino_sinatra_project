@@ -38,7 +38,21 @@ playdate has many playdate_attend
 playdate has many attanded_parent through playdate_attends,source parent_id
 
 
-
+<div class="nav">
+        <%if logged_in?%>
+          <a href='/parents/<%=current_user.slug%>'>Home Page</a> &nbsp;
+          <a href='/babies'>All Babies</a> &nbsp;
+          <a href='/babies/new'>Create a New Baby Profile</a> &nbsp;
+          <a href='/playdates'>All organize Playdates </a> &nbsp;
+          <a href='/attend_playdates'>All attend Playdates </a> &nbsp;
+          <a href='/playdates/new'>Create a new playdate</a> &nbsp;
+     
+          <form>
+             <button formaction='/logout'>Log Out</button>
+          </form>
+        <%end%>
+      </div>
+      
 
 
 
